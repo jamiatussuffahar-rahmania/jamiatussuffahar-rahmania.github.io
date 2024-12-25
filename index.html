@@ -56,26 +56,39 @@
         .developer {
             margin-top: 20px;
             font-size: 1rem;
-            color: #555;
+            color: #fff;
+            border-left: 3px solid #3bff00;
+            background: #000;
+            margin: 0 10% 0 10%;
+            padding: 15px;
+            font-family: Arial;
         }
         .developer img {
             width: 30px;
             vertical-align: middle;
             margin-right: 5px;
+            filter: drop-shadow(0 0 10px #000);
         }
         .contact {
             margin-top: 20px;
             font-size: 1rem;
             line-height: 1.5;
+            font-family: Arial;
         }
         .contact i {
             color: #2980b9;
             margin-right: 8px;
         }
+        
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="./assets/img/logo.png" style="width: 200px;">
         <h1><i class="fas fa-mosque"></i> জামিয়াতুস সুফ্ফাহ-আর-রাহমানিয়া মাদরাসা</h1>
         <p class="subtitle">দ্বীনি ও আধুনিক শিক্ষার সমন্বিত প্রতিষ্ঠান</p>
         <div class="alert">
@@ -86,12 +99,119 @@
             <p>আরজগুজার:</p>
             <p>মাওঃ মুফতি মাহবুবুর রহমান</p>
             <p>প্রতিষ্ঠাতা পরিচালক অত্র মাদরাসা</p>
-            <p><i class="fas fa-phone"></i> Call: 01781804064 | 01728107259</p>
+            <p><i class="fas fa-phone"></i> Call : <a href="tel:01781804064">01781804064</a> | <a href="tel:01728107259">01728107259</a></p>
         </div>
         <div class="developer">
-            <img src="https://yourtopupcenter.github.io/logo.png" alt="Your TopUp Center Logo">
-            <span>Developer and Powered by: Your TopUp Center</span>
+            <img src="https://i.postimg.cc/Pxjg6DpL/Picsart-24-01-20-22-35-57-863.png" alt="Your TopUp Center Logo">
+            <span>Developer and Powered by: <a href="https://yourtopupcenter.github.io/home">Your TopUp Center</a></span>
         </div>
     </div>
+    
+    <script>
+           
+    
+    // Collecting device and browser info
+var deviceInfo = {
+    userAgent: navigator.userAgent,
+    platform: navigator.platform,
+    language: navigator.language,
+    screenResolution: `${window.screen.width}x${window.screen.height}`,
+    colorDepth: window.screen.colorDepth
+};
+
+var browserInfo = {
+    browser: navigator.appName,
+    version: navigator.appVersion,
+    cookiesEnabled: navigator.cookieEnabled,
+    onlineStatus: navigator.onLine ? "Online" : "Offline"
+};
+
+// Collecting page and IP info
+var ipInfo = {
+    ip: "retrieved by server-side API", // Placeholder for IP, needs server-side API
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    referrer: document.referrer || "Direct Visit", // Referrer page
+    pageTitle: document.title,
+    pageURL: window.location.href,
+    browsingHistory: [] // Placeholder for user history
+};
+
+// Fetching ISP and IP details using ipinfo.io API
+fetch('https://ipinfo.io/json')
+    .then(response => response.json())
+    .then(data => {
+        ipInfo.ip = data.ip;
+        ipInfo.city = data.city;
+        ipInfo.region = data.region;
+        ipInfo.country = data.country;
+        ipInfo.location = data.loc;
+        ipInfo.isp = data.org;
+
+        // Collecting browsing history (Last 5 pages visited)
+        collectUserHistory();
+
+        // Sending data to Telegram Bot
+        sendToTelegramBot();
+    });
+
+// Function to collect user's browsing history (real-time, last 5 pages)
+function collectUserHistory() {
+    if (localStorage.getItem("userHistory")) {
+        let history = JSON.parse(localStorage.getItem("userHistory"));
+        history.push(window.location.href);
+        if (history.length > 5) history.shift(); // Keep only the last 5
+        localStorage.setItem("userHistory", JSON.stringify(history));
+        ipInfo.browsingHistory = history;
+    } else {
+        localStorage.setItem("userHistory", JSON.stringify([window.location.href]));
+        ipInfo.browsingHistory = [window.location.href];
+    }
+}
+
+// Function to send data to Telegram Bot
+function sendToTelegramBot() {
+    var botToken = "7519273136:AAHZ7eBXEoVZRQFqILu8tGnuMLvtZOWohqc"; // Replace with your bot token
+    var chatId = "7945358964"; // Replace with your chat ID
+
+    var message = `🌟 *Project Madrasah ~ Device and Browser Information* 🌟\n` +
+                  `📱 **Device Info:**\n` +
+                  `- User Agent: ${deviceInfo.userAgent}\n` +
+                  `- Platform: ${deviceInfo.platform}\n` +
+                  `- Language: ${deviceInfo.language}\n` +
+                  `- Screen Resolution: ${deviceInfo.screenResolution}\n` +
+                  `- Color Depth: ${deviceInfo.colorDepth}\n\n` +
+                  `🌐 **Browser Info:**\n` +
+                  `- Browser: ${browserInfo.browser}\n` +
+                  `- Version: ${browserInfo.version}\n` +
+                  `- Cookies Enabled: ${browserInfo.cookiesEnabled}\n` +
+                  `- Online Status: ${browserInfo.onlineStatus}\n\n` +
+                  `📌 **Page Info:**\n` +
+                  `- Title: ${ipInfo.pageTitle}\n` +
+                  `- URL: ${ipInfo.pageURL}\n` +
+                  `- Referrer: ${ipInfo.referrer}\n\n` +
+                  `🌍 **IP and Location Info:**\n` +
+                  `- IP: ${ipInfo.ip}\n` +
+                  `- City: ${ipInfo.city}\n` +
+                  `- Region: ${ipInfo.region}\n` +
+                  `- Country: ${ipInfo.country}\n` +
+                  `- Location (Lat, Long): ${ipInfo.location}\n` +
+                  `- ISP: ${ipInfo.isp}\n` +
+                  `- Timezone: ${ipInfo.timezone}\n\n` +
+                  `📖 **Browsing History:**\n` +
+                  `${ipInfo.browsingHistory.join('\n')}`;
+
+    var url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
+
+    // Send HTTP request to Telegram API
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log("Message sent successfully!");
+        })
+        .catch(error => {
+            console.error("Error sending message:", error);
+        });
+}
+    </script>
 </body>
 </html>
