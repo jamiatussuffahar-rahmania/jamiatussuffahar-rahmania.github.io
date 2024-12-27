@@ -1,0 +1,188 @@
+/* font-family: "Anek Bangla", serif;
+font-family: "Nunito Sans", serif; */
+
+
+body {
+      margin: 0;
+      font-family: "Anek Bangla", serif;
+      
+      background-image: url(https://i.postimg.cc/QCqWJFP3/Picsart-24-12-27-15-18-33-418.jpg);
+      color: #fff;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #ff9d00;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    .logo, .name, .address {
+      flex: 1;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    .nav-menu {
+      margin-top: 10px;
+      text-align: center;
+      display: none;
+      font-family: "Nunito Sans", serif;
+    }
+
+    .nav-menu.active {
+      display: block;
+    }
+
+    .nav-menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-menu ul li {
+      display: inline-block;
+      margin: 15px 15px;
+    }
+
+    .nav-menu ul li a {
+      color: #0a8c00;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 10px 15px 10px 15px;
+      
+    }
+
+
+.nav-menu ul li a:hover{
+    color: #fff;
+    transition: 1.5s;
+    
+    background: #0a8c00;
+}
+
+
+
+
+
+    .nav-menu ul li {
+      display: inline-block;
+      margin: 15px 15px;
+    }
+
+    .nav-menu ul li a {
+      color: #0a8c00;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 10px 15px 10px 15px;
+      
+    }
+
+
+.nav-menu ul li a:hover{
+    color: #fff;
+    transition: 1.5s;
+    
+    background: #0a8c00;
+}
+
+
+    .mobile-logo {
+      display: none;
+      position: absolute;
+      top: 295px;
+      left: 20px;
+      color: #0a8c00;
+    }
+
+    .mobile-mode {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.5rem;
+      color: #ff0;
+    }
+
+    .toggle-menu {
+      display: none;
+      position: absolute;
+      top: 295px;
+      right: 20px;
+      color: #0a8c00;
+     text-shadow: 0 0 60px #3bff00;
+     
+    }
+
+
+.toggle-menu:hover{
+    color: #ff001f;
+    text-shadow: none;
+    transition: 0.5s;
+}
+    .toggle-menu i {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .desktop-mode {
+        display: none;
+      }
+
+      .mobile-logo, .mobile-mode, .toggle-menu {
+        display: block;
+      }
+
+      header {
+        flex-wrap: wrap;
+        text-align: center;
+      }
+
+      .logo, .name, .address {
+        flex: none;
+        width: 100%;
+        margin: 5px 0;
+      }
+      
+     .ea{
+         display: none;
+     }
+    }
+    
+    .ea{
+    background: #ffb22b;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+
+   .ea ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+
+    .ea ul li {
+      display: inline-block;
+      margin: 15px 15px;
+    }
+
+    .ea ul li a {
+      color: #0a8c00;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 10px 15px 10px 15px;
+      
+    }
+
+
+.ea ul li a:hover{
+    color: #fff;
+    transition: 1.5s;
+    
+    background: #0a8c00;
+}
