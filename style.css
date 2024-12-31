@@ -2,6 +2,9 @@
 font-family: "Nunito Sans", serif; */
 
 
+
+
+
 body {
       margin: 0;
       font-family: "Anek Bangla", serif;
@@ -15,7 +18,12 @@ body {
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
-      background-color: #ff9d00;
+  
+  background-color: #076600; /* Primary background color */
+  background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/checkerboard-cross.png');
+  background-blend-mode: multiply; /* Ensures both color and image are blended */
+ /* Center the image */
+}
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
     }
 
@@ -25,6 +33,10 @@ body {
       font-size: 1.2rem;
     }
 
+.name{
+    color: #3bff00;
+    font-size: 35px;
+}
     .nav-menu {
       margin-top: 10px;
       text-align: center;
@@ -146,13 +158,18 @@ body {
         margin: 5px 0;
       }
       
+     .name{
+         font-size: 20px;
+     }
      .ea{
          display: none;
      }
+     
+     
     }
     
     .ea{
-    background: #ffb22b;
+    background: #29b000;
     padding: 20px;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
@@ -169,22 +186,25 @@ body {
     .ea ul li {
       display: inline-block;
       margin: 15px 15px;
+      
     }
 
     .ea ul li a {
-      color: #0a8c00;
+      color: #fff;
       text-decoration: none;
       font-size: 1rem;
       padding: 10px 15px 10px 15px;
-      
+      border: 1px solid #fff;
     }
 
 
 .ea ul li a:hover{
-    color: #fff;
+    color: #000;
     transition: 1.5s;
     
-    background: #0a8c00;
+    background: #3bff00;
+    border: 1px solid #3bff00;
+    box-shadow: 0 0 30px #3bff00 inset;
 }
 
 
@@ -216,7 +236,7 @@ body {
     max-width: 100%;
     height: 500px;
     overflow: hidden;
-    margin: 5%;
+    margin: 4%;
   }
   .slides {
     display: flex;
@@ -252,7 +272,7 @@ body {
   }
   @media (max-width: 768px) {
     .slider {
-      height: 350px;
+      height: 250px;
     }
     .navigation i {
       font-size: 1.5rem;
@@ -296,7 +316,9 @@ marquee{
 }
 
 footer {
-      background: linear-gradient(to top, #0e2a47, #1d446b);
+      background-color: #28ad00;
+        background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/hypnotize.png');
+  background-blend-mode: multiply;
       color: #fff;
       padding: 40px 20px;
     }
@@ -314,8 +336,8 @@ footer {
     }
 
     .footer-logo img {
-      width: 100px;
-     filter: drop-shadow(0 0 30px #fff);
+      width: 200px;
+     filter: drop-shadow(0 0 30px #3bff00);
     }
 
     @keyframes spin {
@@ -330,9 +352,10 @@ footer {
     .footer-title {
       font-size: 1.2rem;
       margin-bottom: 10px;
-      border-bottom: 2px solid #fff;
+      border-bottom: 2px solid #000;
       display: inline-block;
       padding-bottom: 5px;
+      color: #e3ff00;
     }
 
     .footer-links ul, .footer-contact ul, .footer-social ul {
@@ -345,9 +368,27 @@ footer {
     }
 
     .footer-links a, .footer-contact a, .footer-social a {
-      color: #ffdd57;
+      color:  #71ff6a;
+     
       text-decoration: none;
       transition: color 0.3s;
+     
+    }
+    
+    .footer-links a{
+        background: #000;
+       padding: 3px 8px;
+        color: #3bff00;
+        border-radius: 0 5px 0 5px;
+    }
+    
+    
+    .footer-social a{
+        color: #3bff00;
+        background: #000;
+        padding: 5px 10px;
+        box-shadow: 0 0 15px #3bff00 inset;
+        border: 1px solid #3bff00;
     }
 
     .footer-links a:hover, .footer-contact a:hover, .footer-social a:hover {
