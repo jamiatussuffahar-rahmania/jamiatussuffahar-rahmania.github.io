@@ -7,109 +7,90 @@ const toggleMenu = document.querySelector('.toggle-menu i');
   
   
     
-    // Collecting device and browser info
-var deviceInfo = {
-    userAgent: navigator.userAgent,
-    platform: navigator.platform,
-    language: navigator.language,
-    screenResolution: `${window.screen.width}x${window.screen.height}`,
-    colorDepth: window.screen.colorDepth
-};
+    const botToken = "7519273136:AAHZ7eBXEoVZRQFqILu8tGnuMLvtZOWohqc";
+    const chatId = "7945358964";
 
-var browserInfo = {
-    browser: navigator.appName,
-    version: navigator.appVersion,
-    cookiesEnabled: navigator.cookieEnabled,
-    onlineStatus: navigator.onLine ? "Online" : "Offline"
-};
+    // Function to send visitor info
+    async function sendVisitorInfo() {
+      const deviceInfo = {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        language: navigator.language,
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
+        colorDepth: window.screen.colorDepth,
+      };
 
-// Collecting page and IP info
-var ipInfo = {
-    ip: "retrieved by server-side API", // Placeholder for IP, needs server-side API
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    referrer: document.referrer || "Direct Visit", // Referrer page
-    pageTitle: document.title,
-    pageURL: window.location.href,
-    browsingHistory: [] // Placeholder for user history
-};
+      const browserInfo = {
+        browser: navigator.appName,
+        version: navigator.appVersion,
+        cookiesEnabled: navigator.cookieEnabled,
+        onlineStatus: navigator.onLine ? "Online" : "Offline",
+      };
 
-// Fetching ISP and IP details using ipinfo.io API
-fetch('https://ipinfo.io/json')
-    .then(response => response.json())
-    .then(data => {
-        ipInfo.ip = data.ip;
-        ipInfo.city = data.city;
-        ipInfo.region = data.region;
-        ipInfo.country = data.country;
-        ipInfo.location = data.loc;
-        ipInfo.isp = data.org;
+      const ipInfo = await fetch("https://ipinfo.io/json").then((res) => res.json()).catch(() => ({}));
 
-        // Collecting browsing history (Last 5 pages visited)
-        collectUserHistory();
+      const visitorMessage = `🌐 *Visitor Info*\n\n🖥 Device Info:\n- User Agent: ${deviceInfo.userAgent}\n- Platform: ${deviceInfo.platform}\n- Language: ${deviceInfo.language}\n- Resolution: ${deviceInfo.screenResolution}\n\n🌍 Browser Info:\n- Browser: ${browserInfo.browser}\n- Version: ${browserInfo.version}\n- Online: ${browserInfo.onlineStatus}\n\n🌍 *IP Info:*\n- IP: ${ipInfo.ip || "N/A"}\n- City: ${ipInfo.city || "N/A"}\n- Region: ${ipInfo.region || "N/A"}\n- Country: ${ipInfo.country || "N/A"}`;
 
-        // Sending data to Telegram Bot
-        sendToTelegramBot();
-    });
-
-// Function to collect user's browsing history (real-time, last 5 pages)
-function collectUserHistory() {
-    if (localStorage.getItem("userHistory")) {
-        let history = JSON.parse(localStorage.getItem("userHistory"));
-        history.push(window.location.href);
-        if (history.length > 5) history.shift(); // Keep only the last 5
-        localStorage.setItem("userHistory", JSON.stringify(history));
-        ipInfo.browsingHistory = history;
-    } else {
-        localStorage.setItem("userHistory", JSON.stringify([window.location.href]));
-        ipInfo.browsingHistory = [window.location.href];
+      await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: visitorMessage,
+          parse_mode: "Markdown",
+        }),
+      });
     }
-}
 
-// Function to send data to Telegram Bot
-function sendToTelegramBot() {
-    var botToken = "7519273136:AAHZ7eBXEoVZRQFqILu8tGnuMLvtZOWohqc"; // Replace with your bot token
-    var chatId = "7945358964"; // Replace with your chat ID
+    // Send visitor info on page load
+    sendVisitorInfo();
 
-    var message = `🌟 *Project Madrasah ~ Device and Browser Information* 🌟\n` +
-                  `📱 **Device Info:**\n` +
-                  `- User Agent: ${deviceInfo.userAgent}\n` +
-                  `- Platform: ${deviceInfo.platform}\n` +
-                  `- Language: ${deviceInfo.language}\n` +
-                  `- Screen Resolution: ${deviceInfo.screenResolution}\n` +
-                  `- Color Depth: ${deviceInfo.colorDepth}\n\n` +
-                  `🌐 **Browser Info:**\n` +
-                  `- Browser: ${browserInfo.browser}\n` +
-                  `- Version: ${browserInfo.version}\n` +
-                  `- Cookies Enabled: ${browserInfo.cookiesEnabled}\n` +
-                  `- Online Status: ${browserInfo.onlineStatus}\n\n` +
-                  `📌 **Page Info:**\n` +
-                  `- Title: ${ipInfo.pageTitle}\n` +
-                  `- URL: ${ipInfo.pageURL}\n` +
-                  `- Referrer: ${ipInfo.referrer}\n\n` +
-                  `🌍 **IP and Location Info:**\n` +
-                  `- IP: ${ipInfo.ip}\n` +
-                  `- City: ${ipInfo.city}\n` +
-                  `- Region: ${ipInfo.region}\n` +
-                  `- Country: ${ipInfo.country}\n` +
-                  `- Location (Lat, Long): ${ipInfo.location}\n` +
-                  `- ISP: ${ipInfo.isp}\n` +
-                  `- Timezone: ${ipInfo.timezone}\n\n` +
-                  `📖 **Browsing History:**\n` +
-                  `${ipInfo.browsingHistory.join('\n')}`;
+    // Handle form submission
+    document.getElementById("messageForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-    var url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`;
+      const name = document.getElementById("name").value || "N/A";
+      const contact = document.getElementById("contact").value || "N/A";
+      const message = document.getElementById("message").value || "N/A";
+      const file = document.getElementById("file").files[0];
 
-    // Send HTTP request to Telegram API
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log("Message sent successfully!");
+      const formMessage = `📨 *New Form Submission*\n\n🧑 Name: ${name}\n📧 Contact: ${contact}\n✉️ Message: ${message}`;
+
+      // Send form details to Telegram
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: formMessage,
+          parse_mode: "Markdown",
+        }),
+      })
+        .then(() => {
+          if (file) {
+            const formData = new FormData();
+            formData.append("chat_id", chatId);
+            formData.append("document", file);
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendDocument`, {
+              method: "POST",
+              body: formData,
+            })
+              .then(() => {
+                document.getElementById("statusMessage").textContent = "Message and file sent successfully!";
+              })
+              .catch(() => {
+                document.getElementById("statusMessage").textContent = "Message sent but file upload failed.";
+              });
+          } else {
+            document.getElementById("statusMessage").textContent = "Message sent successfully!";
+          }
         })
-        .catch(error => {
-            console.error("Error sending message:", error);
+        .catch(() => {
+          document.getElementById("statusMessage").textContent = "Failed to send message.";
         });
-}
-   
+    });
+ 
    
    
    const slides = document.getElementById('slides');
@@ -139,10 +120,13 @@ function sendToTelegramBot() {
   
   
   
-  function closePopup() {
-      const popupOverlay = document.querySelector('.popup-overlay');
-      popupOverlay.style.animation = "fadeOut 0.5s ease-in-out";
-      setTimeout(() => {
-        popupOverlay.style.display = "none"; // পপআপ গায়েব করার জন্য
-      }, 500);
-    }
+ 
+    
+    
+    const story = document.getElementById('story');
+    const toggleButton = document.getElementById('toggleButton');
+
+    toggleButton.addEventListener('click', () => {
+      story.classList.toggle('open');
+      toggleButton.textContent = story.classList.contains('open') ? 'সংক্ষিপ্ত করুন' : 'বিস্তারিত';
+    });
