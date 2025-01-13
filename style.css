@@ -560,7 +560,7 @@ footer {
     }
 
     .story {
-      max-height: 500px;
+      max-height: 510px;
       overflow: hidden;
       transition: all 0.5s ease;
       color: #555;
@@ -711,7 +711,7 @@ footer {
    .conf {
     
       color: #fff;
-     
+     background-image: url(https://img.freepik.com/free-photo/grunge-wall-texture_1194-6371.jpg?t=st=1736748181~exp=1736751781~hmac=61dc0287ac0d016c34dc97ef4ffae8086c656623a5351e810b22755cb694a7b5&w=740);
       padding: 0;
       display: flex;
       justify-content: center;
@@ -790,3 +790,25 @@ footer {
         transform: translateY(0);
       }
     }
+    
+   .aud{
+       background: #e3e3f8;
+       margin: 25px 5% 0 5%;
+       border: none;
+       border-radius: 25px;
+       padding: 15px 10px 15px 10px;
+       align-items: center;
+       text-align: center;
+   }
+   
+  .aud p{
+      text-align: center;
+      color: #000;
+      font-size: 20px;
+  }
+  
+ .aud audio{
+     align-item: center;
+     box-shadow: 0 0 25px #000;
+     border-radius: 25px;
+ }
