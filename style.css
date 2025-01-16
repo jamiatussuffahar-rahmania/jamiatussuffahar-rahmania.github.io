@@ -708,6 +708,122 @@ footer {
     }
    
    
+   
+   .done {
+      font-family: 'Arial', sans-serif;
+   
+      background-color: ;
+background-image: url('https://img.freepik.com/free-vector/dark-wavy-background-concept_23-2148408030.jpg?t=st=1737010620~exp=1737014220~hmac=d157ce0a0e0c5a2eda4f34b6d65bf77d801bdb6e554f97c48f276fb3df01b719&w=740');
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .done .header {
+      text-align: center;
+      padding: 3rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+    }
+   .done .header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    }
+   .done .header p {
+      font-size: 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    .about-section {
+      padding: 3rem 1rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 2rem 1rem;
+      border-radius: 15px;
+      animation: fadeInUpnew 1s ease;
+    }
+    .about-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .about-section p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .donation-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding: 3rem 1rem;
+    }
+    .donation-box {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      width: 320px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: zoomInnew 1.5s ease;
+    }
+    .donation-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+    }
+    .donation-box i {
+      font-size: 4rem;
+      color: #ffd700;
+      margin-bottom: 1rem;
+    }
+    .donation-box h3 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .donation-box p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .donation-box button {
+      background: #ffd700;
+      color: #333;
+      border: none;
+      border-radius: 5px;
+      padding: 0.8rem 2rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .donation-box button:hover {
+      background: #ffc107;
+    }
+   
+    /* Animations */
+    @keyframes fadeInUpnew {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes zoomInnew {
+      from {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+    
+    
+   
    .conf {
     
       color: #fff;
